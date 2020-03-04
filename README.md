@@ -2,7 +2,7 @@
 ### How to Run
 Start with docker:
 ```
-cd rate_limitation
+cd Rate-limitation
 docker-compose up
 ```
 Next, browse http://127.0.0.1/ with your web browser. You can see a response like this:
