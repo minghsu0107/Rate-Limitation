@@ -1,0 +1,42 @@
+version: '3'
+services:
+
+    redis:
+        image: redis:latest
+        restart: always
+        command: redis-server --port 6370
+        ports:
+            - "6370:6370"
+        volumes:
+            - redis_data:/data
+
+    core:
+        container_name: api-container
+        build: ./core
+        restart: always
+        depends_on:
+            - redis
+        environment:
+            - REDIS_HOST=redis
+        command: >
+            bash -c "python manage.py collectstatic --noinput
+            && uwsgi --ini settings.ini"
+        volumes:
+            - core_data:/api
+
+    nginx:
+        container_name: nginx-container
+        build: ./nginx
+        restart: always
+        ports:
+            - "80:80"
+        volumes:
+            - core_data:/api
+        depends_on:
+            - core
+
+volumes:  
+    redis_data:
+    core_data:
+
+
