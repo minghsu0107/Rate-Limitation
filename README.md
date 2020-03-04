@@ -29,4 +29,6 @@ I choose Redis as the database for saving states of requests from each IP (IP as
 ```
 `reset_at` is the timestamp that this key entry expires, and `current` is the current accumulated number of requests from an IP.
 
+Inspired by Github's implementaion, I additionally add the X-RateLimit-Limit header to the response, representing the maximum number of requests one can make within the time window.
+
 In addition, I use Nginx as the reverse proxy for the API service. Thus, in order to get client's real IP, we must define X-Forwarded-For and X-Real-IP in the header in Nginx before passing requests to the api server.
