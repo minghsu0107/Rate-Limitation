@@ -1,4 +1,6 @@
 # Rate Limitation
+### [UPDATED]
+Please see [this gist for the express version](https://gist.github.com/minghsu0107/68a734702bc82ad4238336d41fa18b48)
 ### Problem
 Dcard 每天午夜都有大量使用者湧入抽卡，為了不讓伺服器過載，請設計一個 middleware：
 - 限制每小時來自同一個 IP 的請求數量不得超過 1000
